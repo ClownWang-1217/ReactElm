@@ -37,6 +37,7 @@ class Shop extends Component {
     const childrenArray = React.Children.toArray(props.children);
     return childrenArray[0] || null;
   }
+  // 激活购物车
   activeMenu = (index) => {
     this.setState({
       activeIndex: index,
@@ -63,8 +64,7 @@ class Shop extends Component {
     })
     return menu
   }
-  handleClick = (type) =>{
-    console.log('222')
+  handleClick = (type) => {
     let alertText
     switch (type){
       case 'download':
@@ -90,14 +90,17 @@ class Shop extends Component {
       miniMoney: this.state.shopDetailData.float_minimum_order_amount - totalPrice
     })
   }
+  // 清空购物车
   clearCart = () => {
     this.setState({
       foodList: fromJS(this.state.initList).toJS(),
       totalPrice: 0,
       count: 0,
-      isShowCart: false
+      isShowCart: false,
+      miniMoney: 20
     })
   }
+  // 初始化数据
   initData = async id => {
     let obj = {
       latitude: this.props.userInfo.geohash[0],
@@ -107,7 +110,6 @@ class Shop extends Component {
     let menu = await API.getfoodMenu({restaurant_id: id})
     menu = this.setNumOfMenu(menu)
     let foodList = this.setFoodList(menu)
-    console.log(res)
     this.setState({
       shopDetailData: res,
       miniMoney: res.float_minimum_order_amount,
@@ -120,16 +122,18 @@ class Shop extends Component {
       count: 0
     });
   };
+  // 添加, 减少商品
   handleAddFoodCount = (index, type) => {
     let foodList = this.state.foodList
     let nextFoodQty = foodList[index].qty + type
     if (nextFoodQty >= 0) {
       foodList[index].qty += type 
     }
+    
     let nextCount = this.state.count + type
     this.setState({
       foodList,
-      count: nextCount<0?0:nextCount,
+      count: nextFoodQty<0?this.state.count:nextCount,
       animate: this.state.animate + ' animate'
     })
     this.calculateMoney()

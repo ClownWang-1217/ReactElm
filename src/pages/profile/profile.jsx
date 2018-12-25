@@ -41,6 +41,8 @@ class Profile extends Component {
     } else {
       newState.mobile = '暂无手机绑定'
       newState.username = '登录/注册'
+      // console.log(getImgPath(this.props.userInfo.avatar), 'ppp')
+      // newState.avatar = getImgPath(this.props.userInfo.avatar)
     }
     this.setState(newState)
   }

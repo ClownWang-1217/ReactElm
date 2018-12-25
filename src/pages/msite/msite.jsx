@@ -22,6 +22,7 @@ class Msite extends Component {
     geohash: [],
     footTypes: [],
     title: '',
+    text: 'fff',
     imgBaseUrl: "https://fuss10.elemecdn.com"
   };
   getFoodTypes = async () => {
@@ -30,7 +31,7 @@ class Msite extends Component {
       "flag[]": "F",
       group_type: 1
     };
-    let res = await API.getFoodTypes( data);
+    let res = await API.getFoodTypes(data);
     let resLength = res.length;
     let resArr = [...res];
     let foodArr = [];
@@ -78,16 +79,21 @@ class Msite extends Component {
   componentWillMount() {
     setTimeout(this.cityGuess, 2000)
   }
+  testBtn () {  // 
+    console.log(this)
+    this.setState({
+      text: this.state.text + '--'
+    })
+  }
   shouldComponentUpdate(nextProps, nextState) {   // 判断是否要更新render, return true 更新  return false不更新
     let refresh = !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))
-    if (refresh) {
-    }
     return refresh
   }
   render() {
     return (
       <div>
         <Header title={this.state.title} signUp={true} goHome={this.goHome}/>
+        {/* <div style={{height: '200px',marginTop: '100px',backgroundColor: 'red'}} onClick={this.testBtn.bind(this)}>{this.state.text}</div> */}
         <nav className="msite-nav">
           <div className="swiper-container">
             <div className="swiper-wrapper">
@@ -153,7 +159,7 @@ class Msite extends Component {
         </div>:''}
         <Footer/>
       </div>
-    );
+    ); 
   }
 }
 

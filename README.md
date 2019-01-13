@@ -14,7 +14,8 @@ react4 + react-redux + react-router + es6 + axios + sass + webpack
 # 说明
 > 觉得对你有帮助,请点右上角的`Star`支持一下</br>
 > bailicangdu大神的项目地址[点这里](https://github.com/bailicangdu/vue2-elm)</br>
-> 推荐一下我的另一个项目基于vue的UI框架(教你从零开始造轮子) [点这里](https://github.com/liuyangjike/JKUI)
+> 推荐一下我的其它项目用console.log看vue源码 [点这里](https://github.com/liuyangjike/vue-console)
+
 # 项目运行
 `node >= 6.0`
 ```

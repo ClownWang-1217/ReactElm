@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {resetUserInfo} from '@/store/user/action'
+import {resetUserInfo} from '@/store/action'
 import { is, fromJS } from 'immutable';  // 保证数据的不可变
 import {getStore} from '@/utils/commons'
 import './address.scss'

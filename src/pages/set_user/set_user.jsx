@@ -10,7 +10,7 @@ import Name from './name/name'
 import Address from './address/address'
 import Add from './add/add'
 import AddDetail from './add_detail/add_detail'
-import {resetUserInfo} from '@/store/user/action'
+import {resetUserInfo} from '@/store/action'
 
 class SetUser extends Component {
   static propTypes = {

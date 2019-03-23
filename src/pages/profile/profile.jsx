@@ -7,11 +7,11 @@ import Footer from '@/components/footer/footer'
 import AlertTip from '@/components/alert_tip/alert_tip'
 import { is, fromJS } from 'immutable';  // 保证数据的不可变
 import QueueAnim from 'rc-queue-anim'
-import {saveUserInfo} from '@/store/user/action'
+import {saveUserInfo} from '@/store/action'
 import {getStore} from '@/utils/commons'
-import './profile.scss'
 import {getImgPath} from '../../utils/commons'
 import API from '../../api/api'
+import './profile.scss'
 
 class Profile extends Component {
   static propTypes = {
@@ -37,12 +37,9 @@ class Profile extends Component {
       newState.balance = this.props.userInfo.balance
       newState.count = this.props.userInfo.gift_amount
       newState.pointNumber = this.props.userInfo.point
-      newState.imgpath = this.props.userInfo.avatar.indexOf('/') !== -1? '/img/' + this.props.userInfo.avatar:getImgPath(this.props.userInfo.avatar)
     } else {
       newState.mobile = '暂无手机绑定'
       newState.username = '登录/注册'
-      // console.log(getImgPath(this.props.userInfo.avatar), 'ppp')
-      // newState.avatar = getImgPath(this.props.userInfo.avatar)
     }
     this.setState(newState)
   }
@@ -64,18 +61,15 @@ class Profile extends Component {
   }
   // 获取用户信息
   getUserInfo = async () => {
-    let res = await API.getUser({user_id: getStore('user_id')})
-    this.props.saveUserInfo(res)
+    let userInfo = await API.getUser({user_id: getStore('user_id')})
+    userInfo.imgpath = userInfo.avatar.indexOf('/') !== -1? '/img/' + userInfo.avatar:getImgPath()
+    this.props.saveUserInfo(userInfo)
     this.initData()  
   }
   goBack = () => {
     this.props.history.goBack()
   }
   componentWillMount () {
-    if (this.props.userInfo.user_id) {
-      this.initData()
-      return
-    }
     this.getUserInfo()
   }
   componentWillReceiveProps(nextProps){  // 属性props改变时候触发
@@ -83,9 +77,7 @@ class Profile extends Component {
       this.initData(nextProps);
     }
   }
- 
   shouldComponentUpdate(nextProps, nextState) {   // 判断是否要更新render, return true 更新  return false不更新
-    console.log('udapte')
     return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))
   }
   render () {
@@ -172,8 +164,16 @@ class Profile extends Component {
   }
 }
 
-export default connect(state => ({
-  userInfo: state.userInfo
-}), {
-  saveUserInfo
-})(Profile)
+const mapStateToProps = (state) => {
+  return {
+    userInfo: state.userInfo
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    saveUserInfo: (userInfo) => dispatch(saveUserInfo(userInfo))
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Profile)

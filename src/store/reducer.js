@@ -7,6 +7,7 @@ let defaultState = {
   temMessage: '', //临时姓名
   hasAddressList: [], // 已有的地址
   operate: 'edit',
+  userInfo: {},
   temAddress: {
     message: ''
   },  //临时数据
@@ -14,12 +15,13 @@ let defaultState = {
 }
 
 // 用户消息
-export const userInfo = (state = defaultState, action = {}) => {
+export default (state = defaultState, action = {}) => {
+  console.log(action)
   switch (action.type) {
     case user.SAVE_USERINFO:
       return {
         ...state,
-        ...action.value
+        userInfo: action.userInfo
       }
     case user.RESET_USERINFO:
       return {...state, ...{[action.datatype]: action.value}};

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {resetUserInfo} from '@/store/user/action'
+import {resetUserInfo} from '@/store/action'
 import './name.scss'
 
 class Name extends Component {

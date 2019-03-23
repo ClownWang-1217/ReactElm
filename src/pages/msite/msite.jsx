@@ -10,7 +10,7 @@ import API from "../../api/api";
 import { is, fromJS } from 'immutable';  // 保证数据的不可变
 import Swiper from "swiper/dist/js/swiper.js";
 import "swiper/dist/css/swiper.css";
-import {resetUserInfo} from '@/store/user/action'
+import {resetUserInfo} from '@/store/action'
 import PropTypes from 'prop-types'
 
 class Msite extends Component {

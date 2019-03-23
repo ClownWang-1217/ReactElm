@@ -14,7 +14,6 @@ class Header extends Component {
     userInfo: PropTypes.object.isRequired,
   }
   state = {
-    userInfo: false,
     headTitle: '首页'
   }
   handleBack = () => {

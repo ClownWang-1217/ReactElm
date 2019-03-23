@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import QueueAnim from 'rc-queue-anim'
 import Header from '@/components/header/header'
-import {resetUserInfo} from '@/store/user/action'
+import {resetUserInfo} from '@/store/action'
 import {imgUrl} from '@/config/envconfig';   // 环境变量的配置
 import API from '../../api/api'
 import './info.scss'

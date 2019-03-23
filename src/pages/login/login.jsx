@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import Animate from 'rc-animate'
 import './login.scss'
 import {setStore} from '../../utils/commons'
-import {saveUserInfo} from '@/store/user/action'
+import {saveUserInfo} from '@/store/action'
 import API from '../../api/api'
 
 

@@ -8,15 +8,11 @@ import {getStore} from '@/utils/commons'
 import './address.scss'
 import API from '../../../api/api'
 
-
 class Address extends Component {
   static propTypes = {
     saveAttrInfo: PropTypes.func.isRequired,
     hasAddressList: PropTypes.array,
     operate: PropTypes.string
-  }
-  state = {
-    refresh:false, //是否编辑状态
   }
   // 获取用户地址列表
   getAddress = async () =>{
@@ -24,21 +20,17 @@ class Address extends Component {
     this.props.saveAttrInfo('addressList', res)
   }
   handleDelete = (index) => {
-    let hasAddressList = this.props.hasAddressList
-    hasAddressList.splice(index, 1)
-    this.setState({
-      refresh: !this.state.refresh
-    })
+    let hasAddressList = 
+      [...this.props.hasAddressList.slice(0,index),
+        ...this.props.hasAddressList.slice(index + 1)]
     this.props.saveAttrInfo('hasAddressList', hasAddressList)
   }
   componentWillMount () {
     this.getAddress()
   }
-
   shouldComponentUpdate(nextProps, nextState) {   // 判断是否要更新render, return true 更新  return false不更新
     return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))
   }
-
   render () {
     return (
       <div className='address'>

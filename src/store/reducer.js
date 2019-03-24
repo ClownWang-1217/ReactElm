@@ -7,9 +7,6 @@ let defaultState = {
   hasAddressList: [], // 已有的地址
   operate: 'edit',
   userInfo: {},
-  temAddress: {
-    message: ''
-  },  //临时数据
   geohash: []
 }
 

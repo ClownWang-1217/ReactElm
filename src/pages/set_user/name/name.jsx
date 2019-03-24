@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {saveAttrInfo} from '@/store/action'
+import {modifyUserInfo} from '@/store/action'
 import './name.scss'
 
 class Name extends Component {
   static propTypes = {
-    saveAttrInfo: PropTypes.func.isRequired,
+    modifyUserInfo: PropTypes.func.isRequired,
     userInfo: PropTypes.object
   }
   state = {
@@ -45,7 +45,7 @@ class Name extends Component {
     if (!checkResult) {
       return
     }
-    this.props.saveAttrInfo('username', this.state.name)
+    this.props.modifyUserInfo('username', this.state.name)
     this.props.history.goBack()
   }
   render () {
@@ -66,8 +66,15 @@ class Name extends Component {
   }
 }
 
-export default connect(state => ({
-  userInfo: state.userInfo
-}), {
-  saveAttrInfo
-})(Name)
+const mapStateToProps = (state) => {
+  return {
+    userInfo: state.userInfo
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    modifyUserInfo: (key, value) => dispatch(modifyUserInfo(key, value))
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Name)

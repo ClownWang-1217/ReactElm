@@ -7,10 +7,11 @@ import QueueAnim from 'rc-queue-anim'
 import './add.scss'
 
 
-class Address extends Component {
+class Add extends Component {
   static propTypes = {
     saveAttrInfo: PropTypes.func.isRequired,
-    userInfo: PropTypes.object
+    userInfo: PropTypes.object,
+    addressName: PropTypes.string
   }
   state = {
     verify:false,			//姓名
@@ -31,7 +32,7 @@ class Address extends Component {
   }
   // 添加地址
   handleAdd = () => {
-    let hasAddressList = this.props.userInfo.hasAddressList
+    let hasAddressList = this.props.hasAddressList
     hasAddressList.push({
       mesthree: this.state.mesthree,
       telenum: this.state.telenum,
@@ -43,12 +44,11 @@ class Address extends Component {
     this.props.history.push('/setuser/address')
   }
   componentWillMount () {
-    console.log(this.props.location, 'fdf')
     if (this.props.match.params.type === 'fromadd') {
       this.props.saveAttrInfo('addressName', '')
     } else {
       this.setState({
-        message: this.props.userInfo.temMessage
+        message: this.props.temMessage
       })
     }
   }
@@ -121,6 +121,7 @@ class Address extends Component {
     this.bindThing()
   }
   saveMessage = () => {
+    console.log(this.state.message)
     this.props.saveAttrInfo('temMessage', this.state.message)
   }
   handleInput = (type, e) => {
@@ -160,7 +161,7 @@ class Address extends Component {
                 </div>
                 <Link to='/setuser/add_detail' onClick={this.saveMessage} className='add-detail' key='o2'>
                   <div className='input-new'>
-                    <input type="text" placeholder='小区/写字楼/学校等' readOnly='readonly' value={this.props.userInfo.addressName} />
+                    <input type="text" placeholder='小区/写字楼/学校等' readOnly='readonly' value={this.props.addressName} />
                   </div>
                 </Link>
                 <div className='input-new' key='o3'>
@@ -186,8 +187,18 @@ class Address extends Component {
   }
 }
 
-export default connect(state => ({
-  userInfo: state.userInfo
-}), {
-  saveAttrInfo
-})(Address)
+const mapStateToProps = (state) => {
+  return {
+    userInfo: state.userInfo,
+    addressName: state.addressName,
+    temMessage: state.temMessage,
+    hasAddressList: state.hasAddressList
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    saveAttrInfo: (attr, hasAddressList) => dispatch(saveAttrInfo(attr, hasAddressList))
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Add)

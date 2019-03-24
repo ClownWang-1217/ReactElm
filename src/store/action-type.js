@@ -10,4 +10,4 @@ export const SAVE_ATTRINFO = 'SAVE_ATTRINFO'
 
 
 // 保存上传图片
-export const SAVE_IMG = 'SAVE_IMG'
+export const MODIFY_USERINFO = 'MODIFY_USERINFO'

@@ -23,8 +23,8 @@ export default (state = defaultState, action = {}) => {
       }
     case user.SAVE_ATTRINFO:
       return {...state, ...{[action.datatype]: action.value}};
-    case user.SAVE_IMG:
-      return {...state, userInfo: {...state.userInfo, imgpath: action.imgpath}};
+    case user.MODIFY_USERINFO:
+      return {...state, userInfo: {...state.userInfo, [action.key]: action.value}};
     default:
       return state
   }

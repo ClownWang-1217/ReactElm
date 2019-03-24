@@ -6,11 +6,10 @@ import QueueAnim from 'rc-queue-anim'
 import './add_detail.scss'
 import API from '../../../api/api'
 
-
-class Address extends Component {
+class AddDetail extends Component {
   static propTypes = {
     saveAttrInfo: PropTypes.func.isRequired,
-    userInfo: PropTypes.object
+    addressList: PropTypes.array
   }
   state = {
     inputAddress: '',
@@ -35,9 +34,6 @@ class Address extends Component {
     this.props.saveAttrInfo('addressName', name)
     this.props.history.push('/setuser/add/adddetail')
   }
-  componentWillMount () {
-  }
-
   render () {
     return (
       <div>
@@ -54,7 +50,7 @@ class Address extends Component {
           </div>}
           <div className="poisearch-container" key='o4'>
             <ul>
-              {this.props.userInfo.addressList.map((item, index) => {
+              {this.props.addressList.map((item, index) => {
                 return (
                   <li onClick={this.handleChoose.bind(this, item.name)} key={index}>
                     <p>{item.name}</p>
@@ -70,8 +66,15 @@ class Address extends Component {
   }
 }
 
-export default connect(state => ({
-  userInfo: state.userInfo
-}), {
-  saveAttrInfo
-})(Address)
+const mapStateToProps = (state) => {
+  return {
+    addressList: state.addressList
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    saveAttrInfo: (attr, addressList) => dispatch(saveAttrInfo(attr, addressList))
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(AddDetail)

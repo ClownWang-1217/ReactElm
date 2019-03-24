@@ -89,8 +89,15 @@ class SetUser extends Component {
   }
 }
 
-export default connect(state => ({
-  userInfo: state.userInfo
-}), {
-  saveAttrInfo
-})(SetUser)
+const mapStateToProps = (state) => {
+  return {
+    userInfo: state.userInfo
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    saveAttrInfo: (attr, operate) => dispatch(saveAttrInfo(attr, operate))
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(SetUser)

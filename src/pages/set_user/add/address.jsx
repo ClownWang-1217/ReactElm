@@ -8,8 +8,7 @@ import {getStore} from '@/utils/commons'
 import './address.scss'
 import API from '../../../api/api'
 
-
-class Address extends Component {
+class AddressList extends Component {
   static propTypes = {
     saveAttrInfo: PropTypes.func.isRequired,
     hasAddressList: PropTypes.array,
@@ -51,7 +50,7 @@ class Address extends Component {
                   <p>{item.address}</p>
                   <p><span>{item.telenum}</span>{item.standbytelenum&&<span>,{item.standbytelenum}</span>}</p>
                 </div>
-                {this.props.operate === 'success'&&<div className='deletesite'>
+                {this.this.props.operate === 'edit'&&<div className='deletesite'>
                   <span onClick={this.handleDelete.bind(this, index)}>x</span>
                 </div>}
                 </li>
@@ -83,4 +82,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Address)
+export default connect(mapStateToProps,mapDispatchToProps)(AddressList)

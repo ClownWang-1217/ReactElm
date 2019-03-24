@@ -18,10 +18,11 @@ export const saveAttrInfo = (datatype, value) => {
 }
 
 // 修改用户信息
-export const saveImg = (imgpath) => {
+export const modifyUserInfo = (key, value) => {
   return {
-    type: user.SAVE_IMG,
-    imgpath
+    type: user.MODIFY_USERINFO,
+    key,
+    value
   }
 }
 

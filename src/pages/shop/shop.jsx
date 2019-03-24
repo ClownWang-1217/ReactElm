@@ -12,7 +12,8 @@ import {getImgPath} from '@/utils/commons'
 
 class Shop extends Component {
   static propTypes = {
-    userInfo: PropTypes.object.isRequired
+    userInfo: PropTypes.object.isRequired,
+    geohash: PropTypes.array.isRequired
   };
   state = {
     shopId: "",
@@ -103,8 +104,8 @@ class Shop extends Component {
   // 初始化数据
   initData = async id => {
     let obj = {
-      latitude: this.props.userInfo.geohash[0],
-      longitude: this.props.userInfo.geohash[1]
+      latitude: this.props.geohash[0],
+      longitude: this.props.geohash[1]
     };
     let res = await API.shopDetails(id, obj);
     let menu = await API.getfoodMenu({restaurant_id: id})
@@ -118,7 +119,7 @@ class Shop extends Component {
       menuList: menu,
       initList: fromJS(foodList).toJS(),
       foodList,
-      displayList: menu[0].foods,
+      displayList: menu.length?menu[0].foods:[],
       count: 0
     });
   };
@@ -374,8 +375,17 @@ class Shop extends Component {
   }
 }
 
-export default connect(
-  state => ({
-    userInfo: state.userInfo
-  })
-)(Shop);
+const mapStateToProps = (state) => {
+  return {
+    userInfo: state.userInfo,
+    geohash: state.geohash
+  }
+}
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     saveUserInfo: (userInfo) => dispatch(saveUserInfo(userInfo))
+//   }
+// }
+
+export default connect(mapStateToProps)(Shop)

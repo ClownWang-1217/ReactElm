@@ -6,7 +6,6 @@ import {saveAttrInfo} from '@/store/action'
 import QueueAnim from 'rc-queue-anim'
 import './add.scss'
 
-
 class Add extends Component {
   static propTypes = {
     saveAttrInfo: PropTypes.func.isRequired,

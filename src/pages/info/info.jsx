@@ -6,14 +6,14 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import QueueAnim from 'rc-queue-anim'
 import Header from '@/components/header/header'
-import {resetUserInfo} from '@/store/action'
+import {saveImg} from '@/store/action'
 import {imgUrl} from '@/config/envconfig';   // 环境变量的配置
 import API from '../../api/api'
 import './info.scss'
 
 class Info extends Component {
   static propTypes = {
-    resetUserInfo: PropTypes.func.isRequired,
+    saveImg: PropTypes.func.isRequired,
     userInfo: PropTypes.object.isRequired
   }
   state = {
@@ -29,7 +29,7 @@ class Info extends Component {
       let formdata = new FormData();  // 获取表单
       formdata.append('file', event.target.files[0]);  // 上传的文件
       let result = await API.uploadImg(formdata);
-      this.props.resetUserInfo('imgpath', imgUrl + result.image_path)
+      this.props.saveImg(imgUrl + result.image_path)
     }catch(err){
       console.error(err);
     }
@@ -146,8 +146,16 @@ class Info extends Component {
   }
 }
 
-export default connect(state => ({
-  userInfo: state.userInfo
-}), {
-  resetUserInfo
-})(Info)
+const mapStateToProps = (state) => {
+  return {
+    userInfo: state.userInfo
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    saveImg: (imgpath) => dispatch(saveImg(imgpath))
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Info)

@@ -8,6 +8,7 @@ import Animate from 'rc-animate'
 import './login.scss'
 import {setStore} from '../../utils/commons'
 import {saveUserInfo} from '@/store/action'
+import {getImgPath} from '../../utils/commons'
 import API from '../../api/api'
 
 
@@ -68,17 +69,18 @@ class Login extends Component {
       password: this.state.password,
       captcha_code: this.state.codeNumber
     }
-    let res = await API.accountLogin(data)
-    if (res.tip) {
+    let userInfo = await API.accountLogin(data)
+    if (userInfo.tip) {
       this.setState({
         hasAlert: true,
-        alertText: res.response.message
+        alertText: userInfo.response.message
       })
       if (!this.state.loginWay) this.getCaptchaCode();
       return
     }
-    setStore('user_id', res.user_id)
-    this.props.saveUserInfo(res)
+    setStore('user_id', userInfo.user_id)
+    userInfo.imgpath = userInfo.avatar.indexOf('/') !== -1? '/img/' + userInfo.avatar:getImgPath()
+    this.props.saveUserInfo(userInfo)
     this.props.history.push('/profile')
   }
 
@@ -156,8 +158,16 @@ class Login extends Component {
     )
   }
 }
-export default connect(state => ({
-  userInfo: state.userInfo
-}), {
-  saveUserInfo,
-})(Login)
+const mapStateToProps = (state) => {
+  return {
+    userInfo: state.userInfo
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    saveUserInfo: (userInfo) => dispatch(saveUserInfo(userInfo))
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Login)

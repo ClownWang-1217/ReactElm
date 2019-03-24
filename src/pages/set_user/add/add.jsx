@@ -2,14 +2,14 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {resetUserInfo} from '@/store/action'
+import {saveAttrInfo} from '@/store/action'
 import QueueAnim from 'rc-queue-anim'
 import './add.scss'
 
 
 class Address extends Component {
   static propTypes = {
-    resetUserInfo: PropTypes.func.isRequired,
+    saveAttrInfo: PropTypes.func.isRequired,
     userInfo: PropTypes.object
   }
   state = {
@@ -39,13 +39,13 @@ class Address extends Component {
       standbytelenum: this.state.standbytelenum,
       message: this.state.message,
     })
-    this.props.resetUserInfo('hasAddressList', hasAddressList)
+    this.props.saveAttrInfo('hasAddressList', hasAddressList)
     this.props.history.push('/setuser/address')
   }
   componentWillMount () {
     console.log(this.props.location, 'fdf')
     if (this.props.match.params.type === 'fromadd') {
-      this.props.resetUserInfo('addressName', '')
+      this.props.saveAttrInfo('addressName', '')
     } else {
       this.setState({
         message: this.props.userInfo.temMessage
@@ -121,7 +121,7 @@ class Address extends Component {
     this.bindThing()
   }
   saveMessage = () => {
-    this.props.resetUserInfo('temMessage', this.state.message)
+    this.props.saveAttrInfo('temMessage', this.state.message)
   }
   handleInput = (type, e) => {
     let newState = {}
@@ -189,5 +189,5 @@ class Address extends Component {
 export default connect(state => ({
   userInfo: state.userInfo
 }), {
-  resetUserInfo
+  saveAttrInfo
 })(Address)

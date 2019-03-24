@@ -10,7 +10,6 @@ const shop = asyncComponent(() => import("@/pages/shop/shop"))
 const food = asyncComponent(() => import("@/pages/food/food"))
 const technology = asyncComponent(() => import("@/pages/technology/technology"))
 
-
 export default class RouteConfig extends Component {
   render () {
     return (

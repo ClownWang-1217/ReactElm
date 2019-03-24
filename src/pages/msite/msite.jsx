@@ -10,13 +10,12 @@ import API from "../../api/api";
 import { is, fromJS } from 'immutable';  // 保证数据的不可变
 import Swiper from "swiper/dist/js/swiper.js";
 import "swiper/dist/css/swiper.css";
-import {resetUserInfo} from '@/store/action'
+import {saveAttrInfo} from '@/store/action'
 import PropTypes from 'prop-types'
 
 class Msite extends Component {
   static propTypes = {
-    resetUserInfo: PropTypes.func.isRequired,
-    userInfo: PropTypes.object
+    saveAttrInfo: PropTypes.func.isRequired,
   };
   state = {
     geohash: [],
@@ -69,7 +68,7 @@ class Msite extends Component {
     this.setState({
       geohash: [res.latitude, res.longitude]
     });
-    this.props.resetUserInfo('geohash', [res.latitude, res.longitude])
+    this.props.saveAttrInfo('geohash', [res.latitude, res.longitude])
     this.getPoisSite([res.latitude, res.longitude])
     this.getFoodTypes();
   }
@@ -79,12 +78,6 @@ class Msite extends Component {
   componentWillMount() {
     setTimeout(this.cityGuess, 2000)
   }
-  testBtn () {  // 
-    console.log(this)
-    this.setState({
-      text: this.state.text + '--'
-    })
-  }
   shouldComponentUpdate(nextProps, nextState) {   // 判断是否要更新render, return true 更新  return false不更新
     let refresh = !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))
     return refresh
@@ -93,7 +86,6 @@ class Msite extends Component {
     return (
       <div>
         <Header title={this.state.title} signUp={true} goHome={this.goHome}/>
-        {/* <div style={{height: '200px',marginTop: '100px',backgroundColor: 'red'}} onClick={this.testBtn.bind(this)}>{this.state.text}</div> */}
         <nav className="msite-nav">
           <div className="swiper-container">
             <div className="swiper-wrapper">
@@ -163,9 +155,9 @@ class Msite extends Component {
   }
 }
 
-
-export default connect(state => ({
-  userInfo: state.userInfo
-}), {
-  resetUserInfo,
-})(Msite)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    saveAttrInfo: (attr, geohash) => dispatch(saveAttrInfo(attr, geohash))
+  }
+}
+export default connect(()=>({}), mapDispatchToProps)(Msite)

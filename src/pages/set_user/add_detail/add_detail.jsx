@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {resetUserInfo} from '@/store/action'
+import {saveAttrInfo} from '@/store/action'
 import QueueAnim from 'rc-queue-anim'
 import './add_detail.scss'
 import API from '../../../api/api'
@@ -9,7 +9,7 @@ import API from '../../../api/api'
 
 class Address extends Component {
   static propTypes = {
-    resetUserInfo: PropTypes.func.isRequired,
+    saveAttrInfo: PropTypes.func.isRequired,
     userInfo: PropTypes.object
   }
   state = {
@@ -22,7 +22,7 @@ class Address extends Component {
       keyword: this.state.inputAddress
     }
     let res = await API.searchPois(obj)
-    this.props.resetUserInfo('addressList', res)
+    this.props.saveAttrInfo('addressList', res)
   }
   handleChange = (e) => {
     let value = e.target.value
@@ -32,7 +32,7 @@ class Address extends Component {
     })
   }
   handleChoose = (name) => {
-    this.props.resetUserInfo('addressName', name)
+    this.props.saveAttrInfo('addressName', name)
     this.props.history.push('/setuser/add/adddetail')
   }
   componentWillMount () {
@@ -73,5 +73,5 @@ class Address extends Component {
 export default connect(state => ({
   userInfo: state.userInfo
 }), {
-  resetUserInfo
+  saveAttrInfo
 })(Address)

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {resetUserInfo} from '@/store/action'
+import {saveAttrInfo} from '@/store/action'
 import { is, fromJS } from 'immutable';  // 保证数据的不可变
 import {getStore} from '@/utils/commons'
 import './address.scss'
@@ -11,7 +11,7 @@ import API from '../../../api/api'
 
 class Address extends Component {
   static propTypes = {
-    resetUserInfo: PropTypes.func.isRequired,
+    saveAttrInfo: PropTypes.func.isRequired,
     userInfo: PropTypes.object
   }
   state = {
@@ -20,7 +20,7 @@ class Address extends Component {
   // 获取用户地址列表
   getAddress = async () =>{
     const res = await API.getAddress(getStore('user_id'))
-    this.props.resetUserInfo('addressList', res)
+    this.props.saveAttrInfo('addressList', res)
   }
   handleDelete = (index) => {
     let hasAddressList = this.props.userInfo.hasAddressList
@@ -28,7 +28,7 @@ class Address extends Component {
     this.setState({
       refresh: !this.state.refresh
     })
-    this.props.resetUserInfo('hasAddressList', hasAddressList)
+    this.props.saveAttrInfo('hasAddressList', hasAddressList)
   }
   componentWillMount () {
     this.getAddress()
@@ -72,5 +72,5 @@ class Address extends Component {
 export default connect(state => ({
   userInfo: state.userInfo
 }), {
-  resetUserInfo
+  saveAttrInfo
 })(Address)

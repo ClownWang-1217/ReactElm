@@ -5,5 +5,9 @@ export const SAVE_USERINFO = 'SAVE_USERINFO'
 // 清空数据
 export const CLEARIMG = 'CLEARIMG';
 
-// 修改用户信息
-export const RESET_USERINFO = 'RESET_USERINFO'
+// 保存用户信息
+export const SAVE_ATTRINFO = 'SAVE_ATTRINFO'
+
+
+// 保存上传图片
+export const SAVE_IMG = 'SAVE_IMG'

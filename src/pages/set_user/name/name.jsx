@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {resetUserInfo} from '@/store/action'
+import {saveAttrInfo} from '@/store/action'
 import './name.scss'
 
 class Name extends Component {
   static propTypes = {
-    resetUserInfo: PropTypes.func.isRequired,
+    saveAttrInfo: PropTypes.func.isRequired,
     userInfo: PropTypes.object
   }
   state = {
@@ -45,7 +45,7 @@ class Name extends Component {
     if (!checkResult) {
       return
     }
-    this.props.resetUserInfo('username', this.state.name)
+    this.props.saveAttrInfo('username', this.state.name)
     this.props.history.goBack()
   }
   render () {
@@ -69,5 +69,5 @@ class Name extends Component {
 export default connect(state => ({
   userInfo: state.userInfo
 }), {
-  resetUserInfo
+  saveAttrInfo
 })(Name)

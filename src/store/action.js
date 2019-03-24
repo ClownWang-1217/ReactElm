@@ -9,10 +9,19 @@ export const saveUserInfo = (userInfo) => {
 }
 
 // 修改用户信息
-export const resetUserInfo = (datatype, value) => {
+export const saveAttrInfo = (datatype, value) => {
   return {
-    type: user.RESET_USERINFO,
+    type: user.SAVE_ATTRINFO,
     datatype,
     value,
   }
 }
+
+// 修改用户信息
+export const saveImg = (imgpath) => {
+  return {
+    type: user.SAVE_IMG,
+    imgpath
+  }
+}
+

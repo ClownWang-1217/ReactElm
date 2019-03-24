@@ -1,7 +1,6 @@
 import * as user from './action-type'
 
 let defaultState = {
-  imgpath: 'http://elm.cangdu.org/img/167e36b022d24619.jpg', //图片地址
   addressList: [],   // 地址列表
   addressName: '',  // 选中的地址
   temMessage: '', //临时姓名
@@ -16,15 +15,16 @@ let defaultState = {
 
 // 用户消息
 export default (state = defaultState, action = {}) => {
-  console.log(action)
   switch (action.type) {
     case user.SAVE_USERINFO:
       return {
         ...state,
         userInfo: action.userInfo
       }
-    case user.RESET_USERINFO:
+    case user.SAVE_ATTRINFO:
       return {...state, ...{[action.datatype]: action.value}};
+    case user.SAVE_IMG:
+      return {...state, userInfo: {...state.userInfo, imgpath: action.imgpath}};
     default:
       return state
   }

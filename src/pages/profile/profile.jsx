@@ -70,7 +70,11 @@ class Profile extends Component {
     this.props.history.goBack()
   }
   componentWillMount () {
-    this.getUserInfo()
+    if (!this.props.userInfo.user_id) {
+      this.getUserInfo()
+    } else {
+      this.initData()  
+    }
   }
   componentWillReceiveProps(nextProps){  // 属性props改变时候触发
     if(!is(fromJS(this.props.proData), fromJS(nextProps.proData))){   //

@@ -10,11 +10,11 @@ import Name from './name/name'
 import Address from './address/address'
 import Add from './add/add'
 import AddDetail from './add_detail/add_detail'
-import {resetUserInfo} from '@/store/action'
+import {saveAttrInfo} from '@/store/action'
 
 class SetUser extends Component {
   static propTypes = {
-    resetUserInfo: PropTypes.func.isRequired,
+    saveAttrInfo: PropTypes.func.isRequired,
     userInfo: PropTypes.object
   }
   state = {
@@ -58,7 +58,7 @@ class SetUser extends Component {
   }
   editAddresss = () => {
     let operate = this.props.userInfo.operate === 'edit'?'success':'edit'
-    this.props.resetUserInfo('operate', operate)
+    this.props.saveAttrInfo('operate', operate)
   }
   componentWillMount () {
     this.initData(this.props)
@@ -92,5 +92,5 @@ class SetUser extends Component {
 export default connect(state => ({
   userInfo: state.userInfo
 }), {
-  resetUserInfo
+  saveAttrInfo
 })(SetUser)

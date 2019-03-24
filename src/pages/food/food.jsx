@@ -11,7 +11,7 @@ class Food extends Component {
     return (
       <div className='food-container'>
         <Header title={this.props.match.params.title} goBack={this.goBack}/>
-        <ShopList geohash={this.props.match.params.geohash}/>
+        <ShopList geohash={this.props.match.params.geohash.split(',')}/>
       </div>
     )
   }

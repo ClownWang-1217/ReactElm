@@ -142,12 +142,13 @@
       }
     }
   }
-
-  .food-container{
-    display: flex;
-    flex: 1;
-    z-index: 15;
-    background-color: #fff;
+  .shop-container {
+    .food-container{
+      display: flex;
+      flex: 1;
+      z-index: 15;
+      background-color: #fff;
+    }
   }
   .menu-container{
     display: flex;

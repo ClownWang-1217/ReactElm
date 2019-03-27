@@ -44,8 +44,8 @@
 }
 
   .shop-detail-header{
-    overflow: hidden;
     position: relative;
+    @include wh(100%, 3.7rem);
     .header-cover-img{
       width: 100%;
       position: absolute;
@@ -126,6 +126,7 @@
     display: flex;
     background-color: #fff;
     padding: .3rem 0 .6rem;
+    z-index: 15;
     border-bottom: 1px solid #ebebeb;
     div{
       flex: 1;
@@ -145,7 +146,8 @@
   .food-container{
     display: flex;
     flex: 1;
-    padding-bottom: 2rem;
+    z-index: 15;
+    background-color: #fff;
   }
   .menu-container{
     display: flex;
@@ -303,7 +305,7 @@
     }
   }
   .buy-cart-container{
-    position: absolute;
+    position: fixed;
     background-color: #3d3d3f;
     bottom: 0;
     left: 0;

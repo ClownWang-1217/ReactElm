@@ -382,10 +382,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     saveUserInfo: (userInfo) => dispatch(saveUserInfo(userInfo))
-//   }
-// }
 
 export default connect(mapStateToProps)(Shop)

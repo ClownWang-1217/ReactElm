@@ -18,7 +18,7 @@ class ShopList extends Component {
       latitude: props.geohash[0],
       longitude: props.geohash[1]
     }
-    const shopListArr = await API.getShopList( obj)
+    const shopListArr = await API.getShopList(obj)
     this.setState({
       shopListArr: shopListArr
     })

@@ -9,7 +9,7 @@ class Food extends Component {
   }
   render () {
     return (
-      <div className='food-container'>
+      <div className='foodlist-container'>
         <Header title={this.props.match.params.title} goBack={this.goBack}/>
         <ShopList geohash={this.props.match.params.geohash.split(',')}/>
       </div>

@@ -69,7 +69,7 @@ class Profile extends Component {
   goBack = () => {
     this.props.history.goBack()
   }
-  componentWillMount () {
+  componentDidMount () {
     if (!this.props.userInfo.user_id) {
       this.getUserInfo()
     } else {

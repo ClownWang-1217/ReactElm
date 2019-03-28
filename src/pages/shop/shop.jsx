@@ -157,7 +157,7 @@ class Shop extends Component {
   goBack = () => {
     this.props.history.push('/msite')
   }
-  componentWillMount() {
+  componentDidMount () {
     let id = this.props.match.params.id;
     this.initData(id);
   }

@@ -42,7 +42,7 @@ class Add extends Component {
     this.props.saveAttrInfo('hasAddressList', hasAddressList)
     this.props.history.push('/setuser/address')
   }
-  componentWillMount () {
+  componentDidMount () {
     if (this.props.match.params.type === 'fromadd') {
       this.props.saveAttrInfo('addressName', '')
     } else {

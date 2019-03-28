@@ -60,7 +60,7 @@ class SetUser extends Component {
     let operate = this.props.userInfo.operate === 'edit'?'success':'edit'
     this.props.saveAttrInfo('operate', operate)
   }
-  componentWillMount () {
+  componentDidMount () {
     this.initData(this.props)
   }
   componentWillReceiveProps(nextProps){  // 属性props改变时候触发

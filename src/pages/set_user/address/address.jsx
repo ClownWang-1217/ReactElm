@@ -25,7 +25,7 @@ class Address extends Component {
         ...this.props.hasAddressList.slice(index + 1)]
     this.props.saveAttrInfo('hasAddressList', hasAddressList)
   }
-  componentWillMount () {
+  componentDidMount () {
     this.getAddress()
   }
   shouldComponentUpdate(nextProps, nextState) {   // 判断是否要更新render, return true 更新  return false不更新

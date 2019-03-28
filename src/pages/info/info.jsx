@@ -21,9 +21,7 @@ class Info extends Component {
     alertText: '请在手机APP中打开',
     logout: false
   }
-    /*
-  上传图片，并将图片地址存到redux，保留状态
-   */
+  /*上传图片，并将图片地址存到redux，保留状态*/
   uploadImg = async event => {
     try{
       let formdata = new FormData();  // 获取表单
@@ -34,9 +32,7 @@ class Info extends Component {
       console.error(err);
     }
   }
-    /*
-  处理提示
-   */
+  /*处理提示*/
   handleClick = (type) =>{
     let alertText
     let logout = false
@@ -59,15 +55,11 @@ class Info extends Component {
       logout
     })
   }
-  /*
-  返回
-   */
+  /*返回*/
   goBack = () => {
     this.props.history.push('/profile')
   }
-  /*
-  退出
-   */
+  /*退出*/
   logout = (wait) => {
     if (!wait){
       this.props.history.push('/login')

@@ -105,7 +105,7 @@ class Login extends Component {
   goBack = () => {
     this.props.history.goBack()
   }
-  componentWillMount () {
+  componentDidMount () {
     this.getCaptchaCode()
   }
   render() {

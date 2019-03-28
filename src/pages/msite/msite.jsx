@@ -75,8 +75,8 @@ class Msite extends Component {
   goHome = () => {
     this.props.history.push('/')
   }
-  componentWillMount() {
-    setTimeout(this.cityGuess, 2000)
+  componentDidMount () {
+    this.cityGuess()
   }
   shouldComponentUpdate(nextProps, nextState) {   // 判断是否要更新render, return true 更新  return false不更新
     let refresh = !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))

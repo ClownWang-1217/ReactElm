@@ -29,6 +29,7 @@ class Shop extends Component {
     foodList: [],
     animate: 'cart-icon-container active-icon',
     displayList: [],
+    timer: null
   };
   FirstChild = props => {
     const childrenArray = React.Children.toArray(props.children);
@@ -120,8 +121,8 @@ class Shop extends Component {
       initList: fromJS(foodList).toJS(),
       foodList,
       displayList: menu.length?menu[0].foods:[],
-      count: 0
-    });
+      count: 0,
+    })
   };
   // 添加, 减少商品
   handleAddFoodCount = (index, type) => {
@@ -130,7 +131,6 @@ class Shop extends Component {
     if (nextFoodQty >= 0) {
       foodList[index].qty += type 
     }
-    
     let nextCount = this.state.count + type
     this.setState({
       foodList,
@@ -138,10 +138,11 @@ class Shop extends Component {
       animate: this.state.animate + ' animate'
     })
     this.calculateMoney()
-    setTimeout(()=> {
+    var timer = setTimeout(()=> {
       this.setState({
         animate: 'cart-icon-container active-icon',
       })}, 200)
+      this.setState({timer})
   }
   handleShowCart = () => {
     this.setState({
@@ -163,6 +164,9 @@ class Shop extends Component {
   }
   shouldComponentUpdate(nextProps, nextState){
     return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState))
+  }
+  componentWillUnmount () {
+    clearTimeout(this.timer)
   }
   render() {
     return (
@@ -221,7 +225,7 @@ class Shop extends Component {
         <ReactCSSTransitionGroup
           component={this.FirstChild}
           transitionName="shop"
-          transitionEnterTimeout={600}
+          transitionEnterTimeout={200}
           transitionLeaveTimeout={300}>
                {this.state.show&&<div className='food-container'>
                 <div className='menu-container'>

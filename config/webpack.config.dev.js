@@ -13,6 +13,7 @@ const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
+const fs = require('fs')
 
 
 function resolve(dir) {
@@ -27,6 +28,12 @@ const publicPath = '/';
 const publicUrl = '';
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
+
+// first-loading
+const loading = {
+  html: fs.readFileSync(path.resolve(__dirname, '../src/assets/loading/loading.html')),
+  css: '<style id="ui">' + fs.readFileSync(path.resolve(__dirname, '../src/assets/loading/loading.css'))+'</style>',
+}
 
 // style files regexes
 const cssRegex = /\.css$/;
@@ -335,6 +342,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: true,
       template: paths.appHtml,
+      loading: loading
     }),
     // Makes some environment variables available in index.html.
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:

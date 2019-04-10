@@ -17,6 +17,10 @@ const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
+const loading = require('./loading')
+const PrerenderSpaPlugin = require('prerender-spa-plugin')
+const Renderer = PrerenderSpaPlugin.PuppeteerRenderer
+
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -423,6 +427,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: true,
       template: paths.appHtml,
+      loading: loading,
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -436,6 +441,16 @@ module.exports = {
         minifyURLs: true,
       },
     }),
+    // new PrerenderSpaPlugin({
+    //   staticDir: path.resolve(__dirname, '../build'),
+    //   routes: ['/', '/msite', '/profile'],
+    //   // renderer: new Renderer({
+    //   //   inject: {
+    //   //     foo: 'bar'
+    //   //   },
+    //   //   renderAfterDocumentEvent: 'render-event'
+    //   // })
+    // }),
     // Inlines the webpack runtime script. This script is too small to warrant
     // a network request.
     shouldInlineRuntimeChunk && new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime~.+[.]js/]),

@@ -19,9 +19,9 @@ react4 + react-redux + react-router + es6 + axios + sass + webpack
 # 项目运行
 `node >= 6.0`
 ```
-  git clone git@github.com:liuyangjike/react-elm.git
-  cd react-elm
-  npm install 或用 cnpm
+  git clone https://github.com/ClownWang-1217/ReactElm.git
+  cd React-Elm
+  npm install
   npm run start
 ```
 # 演示

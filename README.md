@@ -7,14 +7,11 @@
 ![](https://img.shields.io/badge/webpack-4.19.1-003366.svg)
 ![](https://img.shields.io/badge/license-MIT-orange.svg)
 # 前言
-之前学习vue的时候, 就学习过`bailicangdu`大神的`vue2-elm`项目.最近在学习完react基础,想找一个实战项目来练手深入了解react, 就打算用react重写vue2-elm,后端数据还是用vue2-elm,实在没有经历撸后端(感谢bailicangdu).</br>
+该项目从框架搭建, 代码编写, 到插件的使用, 相对完整, 非常适合学习。</br>
+本次学习目标 1. 拥有实战经验. 2. 深度理解 react-redux, react-router, axios, webpack, es6语法</br>
 该项目是饿了吗, 目前开发了登录、注册、购物车、商品展示、用户信息等,算一个比较完整的项目,这个项目比较复杂,这也是我选这个项目的原因
 # 技术栈
 react4 + react-redux + react-router + es6 + axios + sass + webpack
-# 说明
-> 觉得对你有帮助,请点右上角的`Star`支持一下</br>
-> bailicangdu大神的项目地址[点这里](https://github.com/bailicangdu/vue2-elm)</br>
-> 推荐一下我的另一个项目“用console.log看vue源码” [点这里](https://github.com/liuyangjike/vue-console)
 
 # 项目运行
 `node >= 6.0`
@@ -24,9 +21,6 @@ react4 + react-redux + react-router + es6 + axios + sass + webpack
   npm install
   npm run start
 ```
-# 演示
-[demo](http://www.jikeliu.top)
-> 请用Chrome调试的手机模式查看
 
 
 # 截图
